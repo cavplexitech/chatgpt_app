@@ -1,0 +1,23 @@
+<h1>Ask ChatGPT about your uploaded file</h1>
+
+Upload file
+<%= form_with url: root_path, method: :get do |form| %>
+  <%= form.text_field :file %>
+  <%= form.submit "Upload" %>
+<% end %>
+<%= @success_upload %>
+
+<br>
+<br>
+
+Ask Chatgpt...
+<%= form_with url: root_path, method: :get do |form| %>
+  <%= form.text_field :message %>
+
+  <% unless File.empty?(Rails.root.join('app','training-data', 'train.txt'))  %>
+  <%= form.submit "Send" %>
+  <% end %>
+
+<% end %>
+
+<%= simple_format @response %>
